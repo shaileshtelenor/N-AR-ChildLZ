@@ -1,0 +1,690 @@
+{
+    "network_configuration": {
+        "default_compartment_id": "CMP-LZP-C-NETWORK-KEY",
+        "default_enable_cis_checks": false,
+        "network_configuration_categories": {
+            "shared": {
+                "category_compartment_key": "CMP-LZP-C-NETWORK-KEY",
+                "non_vcn_specific_gateways": {
+                    "dynamic_routing_gateways": {
+                        "DRG-FRA-LZP-HUB-KEY": {
+                            "display_name": "drg-fra-hub",
+                            "drg_attachments": {
+                                "DRGATT-FRA-LZP-NETWORK-VCN-KEY": {
+                                    "display_name": "drtatt-fra-lzp-hub-vcn",
+                                    "network_details": {
+                                        "attached_resource_key": "VCN-LZP-C-NETWORK-KEY",
+                                        "type": "VCN"
+                                    }
+                                }
+                            },
+                            "drg_route_distributions": {
+                            },
+                            "drg_route_tables": {
+                            }
+                        }
+                    }
+                },
+                "vcns": {
+                    "VCN-LZP-C-NETWORK-KEY": {
+                        "block_nat_traffic": false,
+                        "cidr_blocks": [
+                            "172.16.0.0/25"
+                        ],
+                        "display_name": "vcn-eufr2-ct-network",
+                        "dns_label": "vcneufrctnw",
+                        "is_attach_drg": false,
+                        "is_create_igw": false,
+                        "is_ipv6enabled": false,
+                        "is_oracle_gua_allocation_enabled": false,
+                        "route_tables": {
+                            "RT-00-FRA-LZP-HUB-VCN-INGRESS-KEY": {
+                                "display_name": "rt-fra-ct-network",
+                                "route_rules": {}
+                            }
+                        },
+                        "default_security_list": {
+                            "egress_rules": [],
+                            "ingress_rules": [
+                                {
+                                    "stateless": false,
+                                    "protocol": "ICMP",
+                                    "description": "ICMP type 3 code 4",
+                                    "src": "0.0.0.0/0",
+                                    "src_type": "CIDR_BLOCK",
+                                    "icmp_type": 3,
+                                    "icmp_code": 4
+                                }
+                            ]
+                        },
+                        "network_security_groups": {
+                            "NSG-FRA-LZP-C-NETWORK-KEY": {
+                                "display_name": "nsg-fra-lzp-hub-lb",
+                                "egress_rules": {
+                                    "anywhere": {
+                                        "description": "egress to 0.0.0.0/0 over TCP",
+                                        "dst": "0.0.0.0/0",
+                                        "dst_type": "CIDR_BLOCK",
+                                        "protocol": "TCP",
+                                        "stateless": false
+                                    }
+                                },
+                                "ingress_rules": {
+                                    "http_80": {
+                                        "description": "ingress from 0.0.0.0/0 over HTTP 80",
+                                        "dst_port_max": 80,
+                                        "dst_port_min": 80,
+                                        "protocol": "TCP",
+                                        "src": "0.0.0.0/0",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    },
+                                    "http_443": {
+                                        "description": "ingress from 0.0.0.0/0 over HTTPS 443",
+                                        "dst_port_max": 443,
+                                        "dst_port_min": 443,
+                                        "protocol": "TCP",
+                                        "src": "0.0.0.0/0",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    }
+                                }
+                            }
+                        },
+                        "subnets": {
+                            "SN-FR2-CT-NETWORK-KEY": {
+                                "availability_domain": null,
+                                "cidr_block": "172.16.0.0/26",
+                                "dhcp_options_key": "default_dhcp_options",
+                                "display_name": "sn-eufr2-ct-network",
+                                "dns_label": "sneufrctnw",
+                                "prohibit_internet_ingress": false,
+                                "prohibit_public_ip_on_vnic": false,
+                                "security_list_keys": [
+                                    "default_security_list"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "am": {
+                "category_compartment_id": "CMP-LZP-C-AM-KEY",
+                "vcns": {
+                    "VCN-LZP-C-AM-KEY": {
+                        "block_nat_traffic": false,
+                        "cidr_blocks": [
+                            "172.16.1.64/26"
+                        ],
+                        "default_security_list": {
+                            "egress_rules": [],
+                            "ingress_rules": [
+                                {
+                                    "description": "ICMP type 3 code 4",
+                                    "icmp_code": 4,
+                                    "icmp_type": 3,
+                                    "protocol": "ICMP",
+                                    "src": "0.0.0.0/0",
+                                    "src_type": "CIDR_BLOCK",
+                                    "stateless": false
+                                },
+                                {
+                                    "description": "ICMP type 8 (Echo)",
+                                    "icmp_code": 0,
+                                    "icmp_type": 8,
+                                    "protocol": "ICMP",
+                                    "src": "172.16.1.64/27",
+                                    "src_type": "CIDR_BLOCK",
+                                    "stateless": false
+                                }
+                            ]
+                        },
+                        "display_name": "vcn-eufr2-ct-am",
+                        "dns_label": "vcnctam",
+                        "is_attach_drg": false,
+                        "is_create_igw": false,
+                        "is_ipv6enabled": false,
+                        "is_oracle_gua_allocation_enabled": false,
+                        "route_tables": {},
+                        "security_lists": {
+                            "SL-LZP-C-AM-GENERIC-KEY": {
+                                "display_name": "sl-lzp-ct-am",
+                                "egress_rules": [
+                                    {
+                                        "description": "egress to 0.0.0.0/0 over ALL protocols",
+                                        "dst": "0.0.0.0/0",
+                                        "dst_type": "CIDR_BLOCK",
+                                        "protocol": "ALL",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "egress rule for OSN",
+                                        "dst": "all-services",
+                                        "dst_type": "SERVICE_CIDR_BLOCK",
+                                        "protocol": "ALL",
+                                        "stateless": false
+                                    }
+                                ],
+                                "ingress_rules": [
+                                    {
+                                        "description": "ingress from 10.0.2.0/24 over TCP22",
+                                        "dst_port_max": 22,
+                                        "dst_port_min": 22,
+                                        "protocol": "TCP",
+                                        "src": "172.16.1.64/27",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "ICMP type 3 code 4",
+                                        "icmp_code": 4,
+                                        "icmp_type": 3,
+                                        "protocol": "ICMP",
+                                        "src": "0.0.0.0/0",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "ICMP type 8 (Echo)",
+                                        "icmp_code": 0,
+                                        "icmp_type": 8,
+                                        "protocol": "ICMP",
+                                        "src": "172.16.1.64/27",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    }
+                                ]
+                            }
+                        },
+                        "subnets": {
+                            "SSN-LZP-C-AM-KEY": {
+                                "cidr_block": "172.16.1.64/27",
+                                "dhcp_options_key": "default_dhcp_options",
+                                "display_name": "sn-eufr2-ct-am-bastion",
+                                "dns_label": "ssnctambastion",
+                                "prohibit_internet_ingress": true,
+                                "prohibit_public_ip_on_vnic": true,
+                                "security_list_keys": [
+                                    "SL-LZP-C-AM-GENERIC-KEY"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "pm": {
+                "category_compartment_id": "CMP-LZP-C-PM-KEY",
+                "vcns": {
+                    "VCN-LZP-C-PM-KEY": {
+                        "block_nat_traffic": false,
+                        "cidr_blocks": [
+                            "172.16.1.0/26"
+                        ],
+                        "default_security_list": {
+                            "egress_rules": [],
+                            "ingress_rules": [
+                                {
+                                    "description": "ICMP type 3 code 4",
+                                    "icmp_code": 4,
+                                    "icmp_type": 3,
+                                    "protocol": "ICMP",
+                                    "src": "0.0.0.0/0",
+                                    "src_type": "CIDR_BLOCK",
+                                    "stateless": false
+                                },
+                                {
+                                    "description": "ICMP type 8 (Echo)",
+                                    "icmp_code": 0,
+                                    "icmp_type": 8,
+                                    "protocol": "ICMP",
+                                    "src": "172.16.1.0/27",
+                                    "src_type": "CIDR_BLOCK",
+                                    "stateless": false
+                                }
+                            ]
+                        },
+                        "display_name": "vcn-eufr2-ct-pm",
+                        "dns_label": "vcnctpm",
+                        "is_attach_drg": false,
+                        "is_create_igw": false,
+                        "is_ipv6enabled": false,
+                        "is_oracle_gua_allocation_enabled": false,
+                        "route_tables": {},
+                        "security_lists": {
+                            "SL-LZP-C-PM-GENERIC-KEY": {
+                                "display_name": "sl-lzp-ct-pm",
+                                "egress_rules": [
+                                    {
+                                        "description": "egress to 0.0.0.0/0 over ALL protocols",
+                                        "dst": "0.0.0.0/0",
+                                        "dst_type": "CIDR_BLOCK",
+                                        "protocol": "ALL",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "egress rule for OSN",
+                                        "dst": "all-services",
+                                        "dst_type": "SERVICE_CIDR_BLOCK",
+                                        "protocol": "ALL",
+                                        "stateless": false
+                                    }
+                                ],
+                                "ingress_rules": [
+                                    {
+                                        "description": "ingress from 172.16.1.0/26 over TCP22",
+                                        "dst_port_max": 22,
+                                        "dst_port_min": 22,
+                                        "protocol": "TCP",
+                                        "src": "172.16.1.0/26",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "ICMP type 3 code 4",
+                                        "icmp_code": 4,
+                                        "icmp_type": 3,
+                                        "protocol": "ICMP",
+                                        "src": "0.0.0.0/0",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "ICMP type 8 (Echo)",
+                                        "icmp_code": 0,
+                                        "icmp_type": 8,
+                                        "protocol": "ICMP",
+                                        "src": "172.16.1.0/26",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    }
+                                ]
+                            }
+                        },
+                        "subnets": {
+                            "SSN-LZP-C-PM-KEY": {
+                                "cidr_block": "172.16.1.0/27",
+                                "dhcp_options_key": "default_dhcp_options",
+                                "display_name": "sn-eufr2-ct-pm-vdi",
+                                "dns_label": "ssnctpmvdi",
+                                "prohibit_internet_ingress": true,
+                                "prohibit_public_ip_on_vnic": true,
+                                "security_list_keys": [
+                                    "SL-LZP-C-PM-GENERIC-KEY"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "global-dev-e": {
+                "category_compartment_id": "CMP-LZP-C-EXPOSED-KEY",
+                "vcns": {
+                    "VCN-LZP-C-EXPOSED-KEY": {
+                        "block_nat_traffic": false,
+                        "cidr_blocks": [
+                            "172.16.2.0/24"
+                        ],
+                        "default_security_list": {
+                            "egress_rules": [],
+                            "ingress_rules": [
+                                {
+                                    "description": "ICMP type 3 code 4",
+                                    "icmp_code": 4,
+                                    "icmp_type": 3,
+                                    "protocol": "ICMP",
+                                    "src": "0.0.0.0/0",
+                                    "src_type": "CIDR_BLOCK",
+                                    "stateless": false
+                                },
+                                {
+                                    "description": "ICMP type 8 (Echo)",
+                                    "icmp_code": 0,
+                                    "icmp_type": 8,
+                                    "protocol": "ICMP",
+                                    "src": "172.16.1.0/27",
+                                    "src_type": "CIDR_BLOCK",
+                                    "stateless": false
+                                }
+                            ]
+                        },
+                        "display_name": "vcn-eufr2-ct-pm",
+                        "dns_label": "vcnctpm",
+                        "is_attach_drg": false,
+                        "is_create_igw": false,
+                        "is_ipv6enabled": false,
+                        "is_oracle_gua_allocation_enabled": false,
+                        "route_tables": {},
+                        "security_lists": {
+                            "SL-LZP-C-GD-E-GENERIC-KEY": {
+                                "display_name": "sl-lzp-ct-pm",
+                                "egress_rules": [
+                                    {
+                                        "description": "egress to 0.0.0.0/0 over ALL protocols",
+                                        "dst": "0.0.0.0/0",
+                                        "dst_type": "CIDR_BLOCK",
+                                        "protocol": "ALL",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "egress rule for OSN",
+                                        "dst": "all-services",
+                                        "dst_type": "SERVICE_CIDR_BLOCK",
+                                        "protocol": "ALL",
+                                        "stateless": false
+                                    }
+                                ],
+                                "ingress_rules": [
+                                    {
+                                        "description": "ingress from 172.16.2.0/24 over TCP22",
+                                        "dst_port_max": 22,
+                                        "dst_port_min": 22,
+                                        "protocol": "TCP",
+                                        "src": "172.16.2.0/24",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "ICMP type 3 code 4",
+                                        "icmp_code": 4,
+                                        "icmp_type": 3,
+                                        "protocol": "ICMP",
+                                        "src": "0.0.0.0/0",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "ICMP type 8 (Echo)",
+                                        "icmp_code": 0,
+                                        "icmp_type": 8,
+                                        "protocol": "ICMP",
+                                        "src": "172.16.2.0/24",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    }
+                                ]
+                            }
+                        },
+                        "subnets": {
+                            "SSN-LZP-C-GLDEV-E-KEY": {
+                                "cidr_block": "172.16.2.0/26",
+                                "dhcp_options_key": "default_dhcp_options",
+                                "display_name": "sn1-eufr2-ct-global-dev-e",
+                                "dns_label": "ssnctgdeve",
+                                "prohibit_internet_ingress": true,
+                                "prohibit_public_ip_on_vnic": true,
+                                "security_list_keys": [
+                                    "SL-LZP-C-GD-E-GENERIC-KEY"
+                                ]
+                            },
+                            "SSN1-LZP-C-GLDEV-E-KEY": {
+                                "cidr_block": "172.16.2.64/26",
+                                "dhcp_options_key": "default_dhcp_options",
+                                "display_name": "sn1-eufr2-ct-global-dev-e",
+                                "dns_label": "ssnonectgdeve",
+                                "prohibit_internet_ingress": true,
+                                "prohibit_public_ip_on_vnic": true,
+                                "security_list_keys": [
+                                    "SL-LZP-C-GD-E-GENERIC-KEY"
+                                ]
+                            }
+                        },
+                        "vcn_specific_gateways": {
+                            "service_gateways": {
+                                "SGW-FRA-LZP-C-GD-E-KEY": {
+                                    "display_name": "sgw-fra-lzp-c-gd-e",
+                                    "services": "all-services"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "global-dev-ne": {
+                "category_compartment_id": "CMP-LZP-C-NON-EXPOSED-KEY",
+                "vcns": {
+                    "VCN-LZP-C-GLOBALDEV-NONEXPOSED-KEY": {
+                        "block_nat_traffic": false,
+                        "cidr_blocks": [
+                            "172.16.3.0/24"
+                        ],
+                        "default_security_list": {
+                            "egress_rules": [],
+                            "ingress_rules": [
+                                {
+                                    "description": "ICMP type 3 code 4",
+                                    "icmp_code": 4,
+                                    "icmp_type": 3,
+                                    "protocol": "ICMP",
+                                    "src": "0.0.0.0/0",
+                                    "src_type": "CIDR_BLOCK",
+                                    "stateless": false
+                                },
+                                {
+                                    "description": "ICMP type 8 (Echo)",
+                                    "icmp_code": 0,
+                                    "icmp_type": 8,
+                                    "protocol": "ICMP",
+                                    "src": "172.16.3.0/24",
+                                    "src_type": "CIDR_BLOCK",
+                                    "stateless": false
+                                }
+                            ]
+                        },
+                        "display_name": "vcn-eufr2-ct-global-dev-ne ",
+                        "dns_label": "vcncteufrgdne",
+                        "is_attach_drg": false,
+                        "is_create_igw": false,
+                        "is_ipv6enabled": false,
+                        "is_oracle_gua_allocation_enabled": false,
+                        "route_tables": {},
+                        "security_lists": {
+                            "SL-LZP-C-GD-NE-GENERIC-KEY": {
+                                "display_name": "sl-lzp-ct-globaldev-ne",
+                                "egress_rules": [
+                                    {
+                                        "description": "egress to 0.0.0.0/0 over ALL protocols",
+                                        "dst": "0.0.0.0/0",
+                                        "dst_type": "CIDR_BLOCK",
+                                        "protocol": "ALL",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "egress rule for OSN",
+                                        "dst": "all-services",
+                                        "dst_type": "SERVICE_CIDR_BLOCK",
+                                        "protocol": "ALL",
+                                        "stateless": false
+                                    }
+                                ],
+                                "ingress_rules": [
+                                    {
+                                        "description": "ingress from 172.16.3.0/24 over TCP22",
+                                        "dst_port_max": 22,
+                                        "dst_port_min": 22,
+                                        "protocol": "TCP",
+                                        "src": "172.16.3.0/24",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "ICMP type 3 code 4",
+                                        "icmp_code": 4,
+                                        "icmp_type": 3,
+                                        "protocol": "ICMP",
+                                        "src": "0.0.0.0/0",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "ICMP type 8 (Echo)",
+                                        "icmp_code": 0,
+                                        "icmp_type": 8,
+                                        "protocol": "ICMP",
+                                        "src": "172.16.3.0/24",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    }
+                                ]
+                            }
+                        },
+                        "subnets": {
+                            "SSN-LZP-C-GLDEV-NE-KEY": {
+                                "cidr_block": "172.16.3.0/26",
+                                "dhcp_options_key": "default_dhcp_options",
+                                "display_name": "sn1-eufr2-ct-global-dev-ne",
+                                "dns_label": "ssnctgde",
+                                "prohibit_internet_ingress": true,
+                                "prohibit_public_ip_on_vnic": true,
+                                "security_list_keys": [
+                                    "SL-LZP-C-GD-NE-GENERIC-KEY"
+                                ]
+                            },
+                            "SSN1-LZP-C-GLDEV-NE-KEY": {
+                                "cidr_block": "172.16.3.64/26",
+                                "dhcp_options_key": "default_dhcp_options",
+                                "display_name": "sn2-eufr2-ct-global-dev-ne",
+                                "dns_label": "ssnonectgdne",
+                                "prohibit_internet_ingress": true,
+                                "prohibit_public_ip_on_vnic": true,
+                                "security_list_keys": [
+                                    "SL-LZP-C-GD-NE-GENERIC-KEY"
+                                ]
+                            }
+                        },
+                        "vcn_specific_gateways": {
+                            "service_gateways": {
+                                "SGW-FRA-LZP-C-GD-NE-KEY": {
+                                    "display_name": "sgw-fra-lzp-c-gd-ne",
+                                    "services": "all-services"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "global-dev-se": {
+                "category_compartment_id": "CMP-LZP-C-SECURE-KEY",
+                "vcns": {
+                    "VCN-LZP-C-GLOBALDEV-SECURE-KEY": {
+                        "block_nat_traffic": false,
+                        "cidr_blocks": [
+                            "172.16.4.0/24"
+                        ],
+                        "default_security_list": {
+                            "egress_rules": [],
+                            "ingress_rules": [
+                                {
+                                    "description": "ICMP type 3 code 4",
+                                    "icmp_code": 4,
+                                    "icmp_type": 3,
+                                    "protocol": "ICMP",
+                                    "src": "0.0.0.0/0",
+                                    "src_type": "CIDR_BLOCK",
+                                    "stateless": false
+                                },
+                                {
+                                    "description": "ICMP type 8 (Echo)",
+                                    "icmp_code": 0,
+                                    "icmp_type": 8,
+                                    "protocol": "ICMP",
+                                    "src": "172.16.4.0/24",
+                                    "src_type": "CIDR_BLOCK",
+                                    "stateless": false
+                                }
+                            ]
+                        },
+                        "display_name": "vcn-eufr2-ct-global-dev-se",
+                        "dns_label": "vcncteufrgdse",
+                        "is_attach_drg": false,
+                        "is_create_igw": false,
+                        "is_ipv6enabled": false,
+                        "is_oracle_gua_allocation_enabled": false,
+                        "route_tables": {},
+                        "security_lists": {
+                            "SL-LZP-C-GD-SE-GENERIC-KEY": {
+                                "display_name": "sl-lzp-ct-globaldev-se",
+                                "egress_rules": [
+                                    {
+                                        "description": "egress to 0.0.0.0/0 over ALL protocols",
+                                        "dst": "0.0.0.0/0",
+                                        "dst_type": "CIDR_BLOCK",
+                                        "protocol": "ALL",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "egress rule for OSN",
+                                        "dst": "all-services",
+                                        "dst_type": "SERVICE_CIDR_BLOCK",
+                                        "protocol": "ALL",
+                                        "stateless": false
+                                    }
+                                ],
+                                "ingress_rules": [
+                                    {
+                                        "description": "ingress from 172.16.4.0/24 over TCP22",
+                                        "dst_port_max": 22,
+                                        "dst_port_min": 22,
+                                        "protocol": "TCP",
+                                        "src": "172.16.4.0/24",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "ICMP type 3 code 4",
+                                        "icmp_code": 4,
+                                        "icmp_type": 3,
+                                        "protocol": "ICMP",
+                                        "src": "0.0.0.0/0",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    },
+                                    {
+                                        "description": "ICMP type 8 (Echo)",
+                                        "icmp_code": 0,
+                                        "icmp_type": 8,
+                                        "protocol": "ICMP",
+                                        "src": "172.16.4.0/24",
+                                        "src_type": "CIDR_BLOCK",
+                                        "stateless": false
+                                    }
+                                ]
+                            }
+                        },
+                        "subnets": {
+                            "SSN-LZP-C-GLDEV-SE-KEY": {
+                                "cidr_block": "172.16.4.0/27",
+                                "dhcp_options_key": "default_dhcp_options",
+                                "display_name": "sn-eufr2-ct-global-dev-se",
+                                "dns_label": "ssnctgdse",
+                                "prohibit_internet_ingress": true,
+                                "prohibit_public_ip_on_vnic": true,
+                                "security_list_keys": [
+                                    "SL-LZP-C-GD-SE-GENERIC-KEY"
+                                ]
+                            },
+                            "SSN1-LZP-C-GLDEV-SE-KEY": {
+                                "cidr_block": "172.16.4.64/27",
+                                "dhcp_options_key": "default_dhcp_options",
+                                "display_name": "sn1-eufr2-ct-global-dev-se",
+                                "dns_label": "ssnonectgdse",
+                                "prohibit_internet_ingress": true,
+                                "prohibit_public_ip_on_vnic": true,
+                                "security_list_keys": [
+                                    "SL-LZP-C-GD-SE-GENERIC-KEY"
+                                ]
+                            }
+                        },
+                        "vcn_specific_gateways": {
+                            "service_gateways": {
+                                "SGW-FRA-LZP-C-GD-SE-KEY": {
+                                    "display_name": "sgw-fra-lzp-c-gd-se",
+                                    "services": "all-services"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
