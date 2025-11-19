@@ -16,27 +16,6 @@
                                         "attached_resource_key": "VCN-LZP-C-NETWORK-KEY",
                                         "type": "VCN"
                                     }
-                                },
-                                "DRGATT-FRA-LZP-GLOBAL-DEV-E-NETWORK-VCN-KEY": {
-                                    "display_name": "drtatt-fra-global-dev-e-network-vcn",
-                                    "network_details": {
-                                        "attached_resource_key": "VCN-LZP-C-EXPOSED-KEY",
-                                        "type": "VCN"
-                                    }
-                                },
-                                "DRGATT-FRA-LZP-GLOBAL-DEV-NE-NETWORK-VCN-KEY": {
-                                    "display_name": "drtatt-fra-global-dev-ne-network-vcn",
-                                    "network_details": {
-                                        "attached_resource_key": "VCN-LZP-C-GLOBALDEV-NONEXPOSED-KEY",
-                                        "type": "VCN"
-                                    }
-                                },
-                                "DRGATT-FRA-LZP-GLOBAL-DEV-SE-NETWORK-VCN-KEY": {
-                                    "display_name": "drtatt-fra-global-dev-se-network-vcn",
-                                    "network_details": {
-                                        "attached_resource_key": "VCN-LZP-C-GLOBALDEV-SECURE-KEY",
-                                        "type": "VCN"
-                                    }
                                 }
                             },
                             "drg_route_distributions": {},
