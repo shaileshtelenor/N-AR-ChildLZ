@@ -3,15 +3,15 @@
         "default_compartment_id": "CMP-LZP-C-NETWORK-KEY",
         "default_enable_cis_checks": false,
         "network_configuration_categories": {
-            "shared": {
+            "ct-network": {
                 "category_compartment_key": "CMP-LZP-C-NETWORK-KEY",
                 "non_vcn_specific_gateways": {
                     "dynamic_routing_gateways": {
-                        "DRG-FRA-LZP-HUB-KEY": {
-                            "display_name": "drg-fra-hub",
+                        "DRG-FRA-LZP-NETWORK-KEY": {
+                            "display_name": "drg-fra-network",
                             "drg_attachments": {
                                 "DRGATT-FRA-LZP-NETWORK-VCN-KEY": {
-                                    "display_name": "drtatt-fra-lzp-hub-vcn",
+                                    "display_name": "drtatt-fra-lzp-network-vcn",
                                     "network_details": {
                                         "attached_resource_key": "VCN-LZP-C-NETWORK-KEY",
                                         "type": "VCN"
@@ -59,7 +59,7 @@
                         },
                         "network_security_groups": {
                             "NSG-FRA-LZP-C-NETWORK-KEY": {
-                                "display_name": "nsg-fra-lzp-hub-lb",
+                                "display_name": "nsg-fra-lzp-network",
                                 "egress_rules": {
                                     "anywhere": {
                                         "description": "egress to 0.0.0.0/0 over TCP",
@@ -148,7 +148,7 @@
                         "route_tables": {},
                         "security_lists": {
                             "SL-LZP-C-AM-GENERIC-KEY": {
-                                "display_name": "sl-lzp-ct-am",
+                                "display_name": "sl-ct-am",
                                 "egress_rules": [
                                     {
                                         "description": "egress to 0.0.0.0/0 over ALL protocols",
@@ -197,7 +197,7 @@
                             }
                         },
                         "subnets": {
-                            "SSN-LZP-C-AM-KEY": {
+                            "SN-LZP-C-AM-KEY": {
                                 "cidr_block": "172.16.1.64/27",
                                 "dhcp_options_key": "default_dhcp_options",
                                 "display_name": "sn-eufr2-ct-am-bastion",
@@ -252,7 +252,7 @@
                         "route_tables": {},
                         "security_lists": {
                             "SL-LZP-C-PM-GENERIC-KEY": {
-                                "display_name": "sl-lzp-ct-pm",
+                                "display_name": "sl-ct-pm",
                                 "egress_rules": [
                                     {
                                         "description": "egress to 0.0.0.0/0 over ALL protocols",
@@ -301,7 +301,7 @@
                             }
                         },
                         "subnets": {
-                            "SSN-LZP-C-PM-KEY": {
+                            "SN-LZP-C-PM-KEY": {
                                 "cidr_block": "172.16.1.0/27",
                                 "dhcp_options_key": "default_dhcp_options",
                                 "display_name": "sn-eufr2-ct-pm-vdi",
@@ -341,14 +341,14 @@
                                     "icmp_code": 0,
                                     "icmp_type": 8,
                                     "protocol": "ICMP",
-                                    "src": "172.16.1.0/27",
+                                    "src": "172.16.2.0/24",
                                     "src_type": "CIDR_BLOCK",
                                     "stateless": false
                                 }
                             ]
                         },
-                        "display_name": "vcn-eufr2-ct-pm",
-                        "dns_label": "vcnctpm",
+                        "display_name": "vcn-eufr2-ct-global-dev-e",
+                        "dns_label": "vcnctgde",
                         "is_attach_drg": false,
                         "is_create_igw": false,
                         "is_ipv6enabled": false,
@@ -356,7 +356,7 @@
                         "route_tables": {},
                         "security_lists": {
                             "SL-LZP-C-GD-E-GENERIC-KEY": {
-                                "display_name": "sl-lzp-ct-pm",
+                                "display_name": "sl-global-dev-e",
                                 "egress_rules": [
                                     {
                                         "description": "egress to 0.0.0.0/0 over ALL protocols",
@@ -405,22 +405,22 @@
                             }
                         },
                         "subnets": {
-                            "SSN-LZP-C-GLDEV-E-KEY": {
+                            "SN1-LZP-C-GLDEV-E-KEY": {
                                 "cidr_block": "172.16.2.0/26",
                                 "dhcp_options_key": "default_dhcp_options",
                                 "display_name": "sn1-eufr2-ct-global-dev-e",
-                                "dns_label": "ssnctgdeve",
+                                "dns_label": "sn1ctgdeve",
                                 "prohibit_internet_ingress": true,
                                 "prohibit_public_ip_on_vnic": true,
                                 "security_list_keys": [
                                     "SL-LZP-C-GD-E-GENERIC-KEY"
                                 ]
                             },
-                            "SSN1-LZP-C-GLDEV-E-KEY": {
+                            "SN2-LZP-C-GLDEV-E-KEY": {
                                 "cidr_block": "172.16.2.64/26",
                                 "dhcp_options_key": "default_dhcp_options",
-                                "display_name": "sn1-eufr2-ct-global-dev-e",
-                                "dns_label": "ssnonectgdeve",
+                                "display_name": "sn2-eufr2-ct-global-dev-e",
+                                "dns_label": "sn2onectgdeve",
                                 "prohibit_internet_ingress": true,
                                 "prohibit_public_ip_on_vnic": true,
                                 "security_list_keys": [
@@ -470,7 +470,7 @@
                                 }
                             ]
                         },
-                        "display_name": "vcn-eufr2-ct-global-dev-ne ",
+                        "display_name": "vcn-eufr2-ct-global-dev-ne",
                         "dns_label": "vcncteufrgdne",
                         "is_attach_drg": false,
                         "is_create_igw": false,
@@ -479,7 +479,7 @@
                         "route_tables": {},
                         "security_lists": {
                             "SL-LZP-C-GD-NE-GENERIC-KEY": {
-                                "display_name": "sl-lzp-ct-globaldev-ne",
+                                "display_name": "sl-ct-globaldev-ne",
                                 "egress_rules": [
                                     {
                                         "description": "egress to 0.0.0.0/0 over ALL protocols",
@@ -528,22 +528,22 @@
                             }
                         },
                         "subnets": {
-                            "SSN-LZP-C-GLDEV-NE-KEY": {
+                            "SN1-LZP-C-GLDEV-NE-KEY": {
                                 "cidr_block": "172.16.3.0/26",
                                 "dhcp_options_key": "default_dhcp_options",
                                 "display_name": "sn1-eufr2-ct-global-dev-ne",
-                                "dns_label": "ssnctgde",
+                                "dns_label": "sn1ctgde",
                                 "prohibit_internet_ingress": true,
                                 "prohibit_public_ip_on_vnic": true,
                                 "security_list_keys": [
                                     "SL-LZP-C-GD-NE-GENERIC-KEY"
                                 ]
                             },
-                            "SSN1-LZP-C-GLDEV-NE-KEY": {
+                            "SN2-LZP-C-GLDEV-NE-KEY": {
                                 "cidr_block": "172.16.3.64/26",
                                 "dhcp_options_key": "default_dhcp_options",
                                 "display_name": "sn2-eufr2-ct-global-dev-ne",
-                                "dns_label": "ssnonectgdne",
+                                "dns_label": "sn2ctgdne",
                                 "prohibit_internet_ingress": true,
                                 "prohibit_public_ip_on_vnic": true,
                                 "security_list_keys": [
@@ -602,7 +602,7 @@
                         "route_tables": {},
                         "security_lists": {
                             "SL-LZP-C-GD-SE-GENERIC-KEY": {
-                                "display_name": "sl-lzp-ct-globaldev-se",
+                                "display_name": "sl-ct-globaldev-se",
                                 "egress_rules": [
                                     {
                                         "description": "egress to 0.0.0.0/0 over ALL protocols",
@@ -651,22 +651,22 @@
                             }
                         },
                         "subnets": {
-                            "SSN-LZP-C-GLDEV-SE-KEY": {
-                                "cidr_block": "172.16.4.0/27",
+                            "SN1-LZP-C-GLDEV-SE-KEY": {
+                                "cidr_block": "172.16.4.0/26",
                                 "dhcp_options_key": "default_dhcp_options",
-                                "display_name": "sn-eufr2-ct-global-dev-se",
-                                "dns_label": "ssnctgdse",
+                                "display_name": "sn1-eufr2-ct-global-dev-se",
+                                "dns_label": "sn1ctgdse",
                                 "prohibit_internet_ingress": true,
                                 "prohibit_public_ip_on_vnic": true,
                                 "security_list_keys": [
                                     "SL-LZP-C-GD-SE-GENERIC-KEY"
                                 ]
                             },
-                            "SSN1-LZP-C-GLDEV-SE-KEY": {
-                                "cidr_block": "172.16.4.64/27",
+                            "SN2-LZP-C-GLDEV-SE-KEY": {
+                                "cidr_block": "172.16.4.64/26",
                                 "dhcp_options_key": "default_dhcp_options",
-                                "display_name": "sn1-eufr2-ct-global-dev-se",
-                                "dns_label": "ssnonectgdse",
+                                "display_name": "sn2-eufr2-ct-global-dev-se",
+                                "dns_label": "sn2ctgdse",
                                 "prohibit_internet_ingress": true,
                                 "prohibit_public_ip_on_vnic": true,
                                 "security_list_keys": [
